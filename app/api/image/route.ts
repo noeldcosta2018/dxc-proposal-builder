@@ -16,7 +16,7 @@ RULES
 - Make the diagram genuinely useful and information-dense. Label everything clearly. Use boxes, arrows, zones, and hierarchy to convey structure.`
 
 export async function POST(req: NextRequest) {
-  const apiKey = req.headers.get('x-api-key')
+  const apiKey = req.headers.get('x-api-key') || process.env.ANTHROPIC_API_KEY
   if (!apiKey) return NextResponse.json({ error: 'API key missing' }, { status: 401 })
 
   let body: { prompt: string }

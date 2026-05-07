@@ -103,25 +103,6 @@ export default function SetupPage() {
             </div>
           </div>
 
-          <div className="card" style={{ marginBottom: 24 }}>
-            <span className="card-label">API Access</span>
-            <h2 className="card-title" style={{ marginBottom: 20 }}>Anthropic API Key</h2>
-
-            <div>
-              <label className="field-label">API Key</label>
-              <input
-                className="input"
-                type="password"
-                placeholder="sk-ant-..."
-                value={store.apiKey}
-                onChange={(e) => store.setApiKey(e.target.value)}
-              />
-              <p className="field-hint">
-                Stored in browser memory only. Not written to localStorage or disk. Cleared on page refresh.
-              </p>
-            </div>
-          </div>
-
           <div
             style={{
               padding: '16px 20px',

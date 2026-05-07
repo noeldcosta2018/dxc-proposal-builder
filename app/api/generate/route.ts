@@ -4,7 +4,7 @@ import { buildSystemPrompt } from '@/lib/prompt'
 import type { EngagementContext } from '@/lib/context'
 
 export async function POST(req: NextRequest) {
-  const apiKey = req.headers.get('x-api-key')
+  const apiKey = req.headers.get('x-api-key') || process.env.ANTHROPIC_API_KEY
   if (!apiKey) {
     return NextResponse.json({ error: 'API key missing' }, { status: 401 })
   }
