@@ -54,11 +54,6 @@ export default function ImagesPage() {
 
   const generate = async () => {
     if (!prompt.trim()) return
-    if (!store.apiKey) {
-      setError('API key not set. Go to Setup and enter your Anthropic API key.')
-      return
-    }
-
     setLoading(true)
     setError('')
     setSvg('')
@@ -66,10 +61,7 @@ export default function ImagesPage() {
     try {
       const res = await fetch('/api/image', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': store.apiKey,
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt }),
       })
       const data = await res.json()

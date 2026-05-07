@@ -65,15 +65,6 @@ export default function SectionsPage() {
     async (id: string) => {
       const sec = sections.find((s) => s.id === id)
       if (!sec || !sec.heading.trim()) return
-      if (!store.apiKey) {
-        setSections((prev) =>
-          prev.map((s) =>
-            s.id === id ? { ...s, error: 'API key not set. Go to Setup and enter your Anthropic API key.' } : s
-          )
-        )
-        return
-      }
-
       setSections((prev) => prev.map((s) => (s.id === id ? { ...s, loading: true, error: '' } : s)))
 
       const ctx: EngagementContext = {
@@ -89,10 +80,7 @@ export default function SectionsPage() {
       try {
         const res = await fetch('/api/generate', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': store.apiKey,
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ heading: sec.heading, context: ctx }),
         })
         const data = await res.json()
