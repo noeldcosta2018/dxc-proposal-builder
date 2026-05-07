@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 
+export const maxDuration = 60
+
 const SYSTEM = `You are an expert SVG diagram designer for enterprise SAP technology proposals. When given a description, generate a complete, self-contained SVG diagram.
 
 RULES
@@ -29,7 +31,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const message = await client.messages.create({
-      model: 'claude-sonnet-4-5',
+      model: 'claude-sonnet-4-6',
       max_tokens: 4096,
       system: SYSTEM,
       messages: [{ role: 'user', content: prompt }],

@@ -3,6 +3,8 @@ import Anthropic from '@anthropic-ai/sdk'
 import { buildSystemPrompt } from '@/lib/prompt'
 import type { EngagementContext } from '@/lib/context'
 
+export const maxDuration = 60
+
 export async function POST(req: NextRequest) {
   const apiKey = req.headers.get('x-api-key') || process.env.ANTHROPIC_API_KEY
   if (!apiKey) {
@@ -25,15 +27,10 @@ export async function POST(req: NextRequest) {
 
   try {
     const message = await client.messages.create({
-      model: 'claude-sonnet-4-5',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1500,
       system: buildSystemPrompt(context),
-      messages: [
-        {
-          role: 'user',
-          content: `Write the proposal section: "${heading}"`,
-        },
-      ],
+      messages: [{ role: 'user', content: `Write the proposal section: "${heading}"` }],
     })
 
     const content = message.content[0]?.type === 'text' ? message.content[0].text : ''
