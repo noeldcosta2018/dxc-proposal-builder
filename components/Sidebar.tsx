@@ -6,29 +6,9 @@ import DxcLogo from './DxcLogo'
 import { useStore } from '@/lib/context'
 
 const nav = [
-  {
-    label: 'Configure',
-    links: [
-      { href: '/',           label: 'Setup' },
-    ],
-  },
-  {
-    label: 'Content',
-    links: [
-      { href: '/sections',   label: 'Proposal Sections' },
-    ],
-  },
-  {
-    label: 'Diagrams',
-    links: [
-      { href: '/architecture', label: 'SAP Solution Architecture' },
-      { href: '/landscape',    label: 'System Landscape' },
-      { href: '/timeline',     label: 'Project Timeline' },
-      { href: '/raci',         label: 'RACI Matrix' },
-      { href: '/network',      label: 'Network and Security' },
-      { href: '/infographic',  label: 'Executive Infographic' },
-    ],
-  },
+  { href: '/',         label: 'Setup' },
+  { href: '/sections', label: 'Section Builder' },
+  { href: '/images',   label: 'Image Builder' },
 ]
 
 export default function Sidebar() {
@@ -53,24 +33,19 @@ export default function Sidebar() {
 
       <div className="sidebar-nav-wrapper">
         <nav className="sidebar-nav">
-          {nav.map((group) => (
-            <div key={group.label}>
-              <div className="nav-section-label">{group.label}</div>
-              {group.links.map((link) => {
-                const active = pathname === link.href
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`nav-link${active ? ' active' : ''}`}
-                  >
-                    <span className="nav-icon" />
-                    {link.label}
-                  </Link>
-                )
-              })}
-            </div>
-          ))}
+          {nav.map((link) => {
+            const active = pathname === link.href
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link${active ? ' active' : ''}`}
+              >
+                <span className="nav-icon" />
+                {link.label}
+              </Link>
+            )
+          })}
         </nav>
       </div>
 
